@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "Fark Block",
+  "version": "1.0",
+  "description": "Block rows on Fark.com based on user-defined criteria.",
+  "permissions": [
+    "storage",
+    "windows"
+  ],
+  "host_permissions": ["https://www.fark.com/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "resources/icon.png",
+      "32": "resources/icon.png",
+      "48": "resources/icon.png",
+      "128": "resources/icon.png"
+    }
+  },
+  "icons": {
+    "16": "resources/icon.png",
+    "32": "resources/icon.png",
+    "48": "resources/icon.png",
+    "128": "resources/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.fark.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["resources/x.png", "resources/incognito.png"],
+      "matches": ["https://www.fark.com/*"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

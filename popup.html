@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fark Block</title>
+  <style>
+    body { 
+      width: 280px; /* Slightly increased from 250px */
+      font-family: Arial, sans-serif;
+      padding: 10px;
+      margin: 0;
+    }
+    h1 {
+      font-size: 18px;
+      margin-top: 0;
+    }
+    ul { 
+      list-style-type: none; 
+      padding: 0; 
+      max-height: 200px; /* Added max-height */
+      overflow-y: auto; /* Added scrollbar if needed */
+    }
+    li { 
+      margin-bottom: 10px;
+      cursor: pointer;
+      color: blue;
+      text-decoration: underline;
+    }
+    li:hover {
+      color: red;
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      text-align: center;
+    }
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    .icon-size {
+      flex: 1;
+    }
+    .icon-size select {
+      width: 70px;
+    }
+    .toggle {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 22px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+    input:checked + .slider:before {
+      transform: translateX(18px);
+    }
+    .visible-x-toggle {
+      display: flex;
+      align-items: center;
+    }
+    .lists-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .list-section {
+      flex: 1;
+      margin: 0 10px;
+    }
+    .list-section h2 {
+      font-size: 16px;
+      margin-top: 0;
+    }
+    .toast {
+      visibility: hidden;
+      min-width: 200px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+    }
+
+    .toast.show {
+      visibility: visible;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @keyframes fadein {
+      from {bottom: 0; opacity: 0;}
+      to {bottom: 30px; opacity: 1;}
+    }
+
+    @keyframes fadeout {
+      from {bottom: 30px; opacity: 1;}
+      to {bottom: 0; opacity: 0;}
+    }
+  </style>
+</head>
+<body>
+  <h1>Fark Block List</h1>
+  <div class="lists-container">
+    <div class="list-section">
+      <h2>Blocked Domains</h2>
+      <p>Click to remove from block list:</p>
+      <ul id="blockList"></ul>
+    </div>
+    <div class="list-section">
+      <h2>Incognito Domains</h2>
+      <p>Click to remove from incognito list:</p>
+      <ul id="incognitoList"></ul>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="icon-size">
+      <label for="iconSize">Icon size:</label>
+      <select id="iconSize">
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large" selected>Large</option>
+      </select>
+    </div>
+    <div class="visible-x-toggle">
+      <label class="toggle">
+        <input type="checkbox" id="activeToggle" checked>
+        <span class="slider"></span>
+      </label>
+      <span>Visible Icons</span>
+    </div>
+  </div>
+  <div class="footer">
+    <hr>
+    Icons courtesy of <a href="https://www.cleanpng.com/" target="_blank">cleanpng</a>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="popup.js"></script>
+</body>
+</html>
